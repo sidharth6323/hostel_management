@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+	{% extends "base.html" %}
+	{% load staticfiles %}
+{% block head %} {% if user.is_authenticated %} <meta http-equiv="REFRESH" content="0;url=/profile/"> {% endif %}{% endblock %}
+{% block mainlinks %}
+		<a class="mdl-navigation__link" href="">Home</a>
+        <a class="mdl-navigation__link" href="/signup/">SignUp</a>
+        
+      {% endblock %}
+{% block content %}
+
+
+<div class="mdl-card__supporting-text">
+    Enter the credententials. or click at bottom for creating a new user...
+{% if form.errors %}
+<p class="error">Sorry, that's not a valid username or password</p>
+{% endif %}  
+  <div id="form" style="padding-left:400px; padding-top:100px; padding-bottom:60px;">
+<form action="." method="post">
+{% csrf_token %}
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="username" name="username">
+    <label class="mdl-textfield__label" for="username">Username...</label>
+</div>
+<br/>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="password" id="password" name="password">
+    <label class="mdl-textfield__label" for="password">Password...</label>
+</div>
+<div class="button" style="padding-left:10px;">
+<input type="submit" value="log in"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+</div>
+<input type="hidden" name="next" value="/profile/" />
+</form>
+</div>
+
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/signup/">
+      Add a new user
+    </a>
+  </div>
+  <div class="mdl-card__menu">
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+      <i class="material-icons">share</i>
+    </button>
+  </div>
+
+
+{% endblock %}    

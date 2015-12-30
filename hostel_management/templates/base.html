@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	{% load staticfiles %}
+<head>{% block head %}{% endblock %}</head>
+    <title>Hostel Management System</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{% static "material.teal-red.min.css" %}" />
+<link rel="stylesheet" href="{% static "style.css" %}" />
+<style type="text/css">
+body {
+	background-color:#E6E6E6;
+	background-image:url()
+}
+</style>
+<script src="{% static "material.min.js" %}"></script>
+<script src="{% static "jquery-2.1.4.min.js" %}"></script>
+<script src="{% static "scripts.js" %}"></script>
+
+
+<meta charset="utf-8">
+
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+    
+      <!-- Title -->
+      <span class="mdl-layout-title">Hostel Management system</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        {% block mainlinks %}
+      {% endblock %}
+      </nav>
+    </div>
+  </header>
+<div class="mdl-layout__drawer">
+
+    <span class="mdl-layout-title">Edit database</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="/student/">STUDENT</a>
+      <a class="mdl-navigation__link" href="/mess_bill/">MESS BILL</a>
+      <a class="mdl-navigation__link" href="/hostel_fee/">HOSTEL FEE</a>
+    </nav>
+</div>
+
+<!-- Wide card with share menu button -->
+<style>
+.demo-card-wide.mdl-card {
+  width: 1200px;
+  left:95px;
+  top:40px;
+  
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  background:url(../../static/Polygon_Art_Abstract_1920x1080.jpg);
+  box-shadow: 0px 2px 4px #888888;
+  min-height:100px;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+</style>
+
+<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    {% block headercard %}<h2 class="mdl-card__title-text">SIGN IN</h2>{% endblock %}
+  </div>
+{% block content %}{% endblock %}
+
+</div>
+<br/><br/>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+	{% extends "base.html" %}
+	{% load staticfiles %}
+    {% block head %} {% if user.is_authenticated %} <meta http-equiv="REFRESH" content="0;url=/profile/"> {% endif %}{% endblock %}
+{% block headercard %}
+<h2 class="mdl-card__title-text"> {% if user.is_authenticated %}
+Welcome, {{ user.username }}
+{% else %}
+Welcome, new user
+{% endif %}
+</h2>{% endblock %}
+{% block mainlinks %}
+		<a class="mdl-navigation__link" href="/index/">Home</a>
+        <a class="mdl-navigation__link" href="/index/">Login</a>
+        
+      {% endblock %}
+{% block content %}
+<div id="content" style="padding-bottom:50px;">
+<div id="form" style="padding-left:400px;">
+<br/><br/><br/><br/><br/><br/>
+<form action="." method="post">
+    {% csrf_token %}
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="padding-right:20px;">
+    
+    <input id="id_username" class="mdl-textfield__input" maxlength="30" name="username" type="text" />
+	<label for="id_username" class="mdl-textfield__label">Username:</label>
+	<span style="font-size:13px;color:#848484;">{{ form.username.errors.as_text }}</span>
+</div></br>
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="padding-right:20px;">
+<input id="id_password1" class="mdl-textfield__input" name="password1" type="password" />
+<label for="id_password1" class="mdl-textfield__label">Password:</label>
+<span style="font-size:13px;color:#848484;">{{ form.password1.errors.as_text }}</span>
+	</div></br>
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="padding-right:20px;">
+<input id="id_password2" name="password2" class="mdl-textfield__input" type="password" />
+<label for="id_password2" class="mdl-textfield__label" >Password confirmation:</label>
+<span style="font-size:13px;color:#848484;">{{ form.password2.errors.as_text }}</span>
+	</div></br>
+    <input type="submit" value="signup"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">   
+</form>
+</div>
+</div>
+{% endblock %}

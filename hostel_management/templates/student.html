@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+	{% extends "base.html" %}
+	{% load staticfiles %}
+    
+{% block headercard %}
+<h2 class="mdl-card__title-text"> Edit Students Database
+</h2>{% endblock %}
+{% block mainlinks %}
+		<a class="mdl-navigation__link" href="/index/">Home</a>
+        <a class="mdl-navigation__link" href="/logout/">Logout as {{user.username}}</a>
+        
+      {% endblock %}
+{% block content %}
+<div id="content" style="padding-bottom:50px;">
+<div id="form" style="padding-left:400px;">
+<br/><br/><br/><br/><br/><br/>
+<form action="." method="post" enctype=multipart/form-data>
+    {% csrf_token %}
+    Select a excel(xls) file to import:</br></br><input type="file" name="file"><br/></br>
+    <input type="submit" value="import"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">   
+    {% if uploaded %} file has been uploaded {% endif %}
+    <p>{{form.errors}}</p>
+</form>
+</br>
+{% csrf_token %}
+Or <a href="/export/">click here</a> to export
+</div>
+</div>
+{% endblock %}

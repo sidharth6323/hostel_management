@@ -1,0 +1,16 @@
+{% extends "edit_form_base.html" %}
+	{% load staticfiles %}
+    {% block headercard %}<h2 class="mdl-card__title-text">Edit {{student.name}}</h2>{% endblock %}
+    
+    {% block content %}
+    <div style="padding-left:50px;">
+        
+        <br/><br/><br/>
+        <form action="." method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Update" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">            
+        </form>
+        <br/><br/><br/>
+        </div>
+    {% endblock %}

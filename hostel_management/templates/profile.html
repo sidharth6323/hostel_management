@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+	{% extends "base.html" %}
+	{% load staticfiles %}
+    
+{% block headercard %}
+<h2 class="mdl-card__title-text"> {% if user.is_authenticated %}
+Welcome, {{ user.username }}
+{% else %}
+Welcome, new user
+{% endif %}
+</h2>{% endblock %}
+{% block mainlinks %}
+		<a class="mdl-navigation__link" href="">Home</a>
+        <a class="mdl-navigation__link" href="/logout/">Logout as {{ user.username}}</a>
+        
+      {% endblock %}
+{% block content %}
+<div id="content" style="padding-bottom:50px;">
+<div id="form" style="padding-left:400px;">
+<br/><br/><br/><br/><br/><br/>
+<form action="." method="get">
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="padding-right:20px;">
+    <input class="mdl-textfield__input" type="text" id="search" name="search" value={{query}}>
+    <label class="mdl-textfield__label" for="search">Enter Name or USN to search...</label>
+</div>
+<input type="submit" value="search"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+
+
+        
+        
+        
+</form>
+</div>
+<div class="table" style="padding-left:70px;">
+<br/><br/><br/><br/>
+{% if query %}
+{% if results %}
+        Search results for   {{query|upper}}  [ <a href="/delete/{{query}}" onclick="return confirm('Delete all the items?')">delete all</a> ] [ <a href="/export/{{query}}">export all</a> ]  :<br/><br/>
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">USN</th>
+      <th style="text-align:center">NAME</th>
+      
+      <th style="text-align:center; padding-right:50px;"> </th>
+      <th style="text-align:center; padding-right:80px;">MESS BILL PAID</th>
+      <th style="text-align:center; padding-right:50px;">HOSTEL FEE PAID</th>
+      <th style="text-align:center">FINE(IF ANY)</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for student in results %}
+<tr>
+   <td class="mdl-data-table__cell--non-numeric">{{student.usn|upper}}</td>
+   <td style="text-align:center;">{{student.name|upper}}</td>
+   <td style="text-align:center;"></td>
+   
+   <td style="text-align:left;">{% for i in student.mess_bill_paid.all %}  {{i}}<br/>{% endfor %}<br/>
+   </td>
+   <td style="text-align:left;">{% for i in student.hostel_fee_paid.all %}  {{i}}<br/> {% endfor %}</td>
+   <td style="text-align:center;">{% for i in student.fine_student.all %}  {{i}}<br/> {% endfor %}</td>
+   
+   <td style="text-align:center;">
+<a href="/profile/{{student.usn}}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width:50px; height:30px;" onclick="window.open(this.href, 'mywin',
+'left=350,top=100,width=500,height=1000,toolbar=0,resizable=0'); return false;">edit</a>
+</td>
+   
+    </tr>
+{% endfor %}    
+  </tbody>
+</table>
+{% else %}
+No Student found
+{% endif %}
+{% endif %}
+</div>
+</div>
+{% endblock %}

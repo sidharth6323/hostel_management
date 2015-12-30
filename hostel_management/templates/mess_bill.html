@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+	{% extends "base.html" %}
+	{% load staticfiles %}
+    
+{% block headercard %}
+<h2 class="mdl-card__title-text">Update Mess-Bill Database
+</h2>{% endblock %}
+{% block mainlinks %}
+		<a class="mdl-navigation__link" href="/profile/">Home</a>
+        <a class="mdl-navigation__link" href="/logout/">Logout as {{ user.username}}</a>
+        
+      {% endblock %}
+{% block content %}
+    <div style="padding-left:400px; padding-top:50px;">
+        <br/><br/><br/>
+    <form action="." method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Update" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">            
+        </form></br>
+    </div>
+        <div style="padding-left: 200px; padding-top: 30px;">
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Month</th>
+      <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+      <th>Bill</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in mess_deposit %}
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">{{i.month}}</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td>
+      <td>{{i.bill}}</td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br/><br/><br/>
+        </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+<html>
+    <head><h1>Your profile has been updated</h1></head>
+    <body>
+                      Name -  {{student.name|upper}}
+                      <br/><br/>
+                      USN -  {{student.usn|upper}}
+                      <br/><br/>
+                      Email -  {{student.email}}
+                      <br/><br/>
+                      Hostel-Fee-Paid -  {% for i in student.hostel_fee_paid.all %}
+                                            {{i}}<br/>
+                                            {% endfor %}
+                      <br/><br/>
+                      Mess-Bill-Paid- {% for i in student.mess_bill_paid.all %}
+                                            {{i}}<br/>
+                                            {% endfor %}
+                      <br/><br/>
+                      Fine- {% for i in student.fine_student.all %}
+                                            {{i}}<br/>
+                                            {% endfor %}
+                                        
+        
+        
+        
+    </body>
+     
+    
+</html>
