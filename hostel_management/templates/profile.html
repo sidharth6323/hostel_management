@@ -40,6 +40,7 @@ Welcome, new user
 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
   <thead>
     <tr>
+      <th class="mdl-data-table__cell--non-numeric">PHOTO</th>
       <th class="mdl-data-table__cell--non-numeric">USN</th>
       <th style="text-align:center">NAME</th>
       
@@ -52,6 +53,15 @@ Welcome, new user
   <tbody>
 {% for student in results %}
 <tr>
+   <td class="mdl-data-table__cell--non-numeric">
+       {% if student.profile_picture %}
+           <img src="{{ student.profile_picture.url }}" alt="{{ student.name }}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+       {% else %}
+           <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #666;">
+               No Photo
+           </div>
+       {% endif %}
+   </td>
    <td class="mdl-data-table__cell--non-numeric">{{student.usn|upper}}</td>
    <td style="text-align:center;">{{student.name|upper}}</td>
    <td style="text-align:center;"></td>

@@ -6,7 +6,16 @@
     <div style="padding-left:50px;">
         
         <br/><br/><br/>
-        <form action="." method="post">
+        
+        <!-- Current Profile Picture Display -->
+        {% if student.profile_picture %}
+        <div style="margin-bottom: 20px;">
+            <h4>Current Profile Picture:</h4>
+            <img src="{{ student.profile_picture.url }}" alt="{{ student.name }}" style="width: 150px; height: 150px; border-radius: 10px; object-fit: cover; border: 2px solid #e0e0e0;">
+        </div>
+        {% endif %}
+        
+        <form action="." method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" value="Update" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">            

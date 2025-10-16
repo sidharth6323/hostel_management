@@ -7,8 +7,9 @@ from django.contrib.auth.models import User
 class StudentForm(forms.ModelForm):
     class Meta:
         model= Student
-        fields=['email','hostel_fee_paid','mess_bill_paid','fine_student',]
+        fields=['email','profile_picture','hostel_fee_paid','mess_bill_paid','fine_student',]
         widgets={'email':forms.TextInput(attrs={'placeholder':'Email','name':'Name','class':'mdl-textfield__input','size': '10'}),
+            'profile_picture':forms.FileInput(attrs={'class':'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect','accept':'image/*'}),
             'hostel_fee_paid':forms.CheckboxSelectMultiple(attrs={'class':'"mdl-checkbox__input'}),
                  'mess_bill_paid':forms.CheckboxSelectMultiple,
                  'fine_student':forms.CheckboxSelectMultiple
